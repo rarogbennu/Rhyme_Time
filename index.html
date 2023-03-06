@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rime Thyme</title>
+    <link rel="stylesheet" href="general.css" />
+    <link rel="icon" href="RimeThyme/owl.png">
+  </head>
+
+  <body>
+    <div id="screen">
+      <div id="game">
+        <div id="game_background"></div>
+
+        <div id="game_elements">
+        </div>
+          <div id="lime_container">
+            <img id="lime_sprite" src="RimeThyme/lime.png" alt="Lime">
+          </div>
+
+          <div id="lemon_container">
+            <img id="lemon_sprite" src="RimeThyme/lemon.png" alt="Lemon">
+          </div>
+
+          <div id="mime_container">
+            <img id="mime_sprite" src="RimeThyme/mime.png" alt="Mime">
+          </div>
+
+          <div id="clown_container">
+              <img id="clown_sprite" src="RimeThyme/clown.png" alt="Clown">
+          </div>
+
+          <div id="chime_container">
+            <img id="chime_sprite" src="RimeThyme/chime.png" alt="Chime">
+          </div>
+
+          <div id="xylo_container">
+            <img id="xylo_sprite" src="RimeThyme/xylophone.png" alt="Xylophone">
+          </div>
+
+
+          <div id="hestmedhat_container" class="rotationbig">
+            <img id="hestmedhat_sprite" src="RimeThyme/horsewithhat.png" alt="Horse">
+          </div>
+
+          </div>
+
+          <div id="game_ui">
+            <div id="score_board">
+            <img id="point_image" src="RimeThyme/points.png" alt="hand pointing">
+            <div id="point_count">0</div>
+            </div>
+            <div id="life_board">
+              <img id="life1" src="RimeThyme/wellbee.png" alt="wellbee">
+              <img id="life2" src="RimeThyme/wellbee.png" alt="wellbee">
+              <img id="life3" src="RimeThyme/wellbee.png" alt="wellbee">
+              <img id="life4" src="RimeThyme/wellbee.png" alt="wellbee">
+              <img id="life5" src="RimeThyme/wellbee.png" alt="wellbee">
+              <img id="life6" src="RimeThyme/wellbee.png" alt="wellbee">
+            </div>
+        
+            <div id="time_board">
+                <div id="time_container">
+                    <div id="time_sprite" class=""></div>
+                </div>
+            </div>
+
+          </div>
+          <div id="start">
+            <h4>RHYME TIME</h4>
+          <p> <br><br> Instructions:<br> Everything that rhymes with TIME is <br> <b style="color:black;">GOOD</b> <b style="color: rgb(16, 103, 129);">(lime, mime, chime)</b> <br> Everything that does <i>not</i> rhyme with time is <br> <b style="color:blue;">BAD</b> <b style="color: blueviolet;">(lemon, clown, xylophone)</b>
+          </p>
+            <button id="start_button" >Let the game begin!</button>
+          </div>
+
+          <div id="game_over" class="hidden"><h2>GAME OVER!!!
+            <button id="gameover_button" >Let's try from the start!</button>
+          </h2></div>
+            
+          <div id="level_complete" class="hidden"><h3>You WIN!!!</h3>
+          <button id="complete_button" >Here we go again!</button></div>
+            
+        </div>
+
+    <audio id="good_sound" src="RimeThyme/good.wav"></audio>
+    <audio id="bad_sound" src="RimeThyme/bad.wav"></audio>
+    <audio id="background_sound" src="RimeThyme/background.wav"></audio>
+    <audio id="gameover_sound" src="RimeThyme/gameover.wav"></audio>
+    <audio id="levelcomplete_sound" src="RimeThyme/complete.wav"></audio>
+      
+    <script src="script.js"></script>
+  </body>
+</html>
