@@ -90,6 +90,7 @@ button {
 body {
   margin: 0;
   overflow: hidden;
+  user-select: none;
 }
 
 #screen {
@@ -237,17 +238,6 @@ body {
   width: 100%;
 }
 
-/* #katmedhat_container {
-  width: 10%;
-  position: absolute;
-  top: 40%;
-  left: 10%;
-}
-
-#katmedhat_sprite {
-  width: 100%;
-} */
-
 /* Lifebar, points and time */
 
 #game_ui {
@@ -317,7 +307,7 @@ body {
 
 .shrink_watch {
   animation-name: shrink_watch;
-  animation-duration: 300s;
+  animation-duration: 30s;
   animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-fill-mode: forwards;

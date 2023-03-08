@@ -6,28 +6,20 @@ let points = 0;
 let lives = 0;
 
 function ready() {
-  // console.log("ready");
+  // styrer klik på knapper og hvor de fører hen
   document.querySelector("#start_button").addEventListener("click", start);
-  document.querySelector("#complete_button").addEventListener("click", start);
-  document.querySelector("#gameover_button").addEventListener("click", showStartScreen);
+  document.querySelector("#complete_button").addEventListener("click", showStartScreen);
+  document.querySelector("#gameover_button").addEventListener("click", start);
 }
 
 function timeStart() {
-  //   console.log("timeStart");
+  // animation af timer og hvad der sker når tiden er færdig
   document.querySelector("#time_sprite").classList.add("shrink_watch");
-  document.querySelector("#time_sprite").addEventListener("animationend", timeDone);
-}
-
-function timeDone() {
-  //   console.log("timeDone");
-  if (points >= 100) {
-    levelComplete();
-  } else {
-    gameOver();
-  }
+  document.querySelector("#time_sprite").addEventListener("animationend", gameOver);
 }
 
 function resetLife() {
+  // liv ved start og efter level complete/game over
   lives = 6;
   document.querySelector("#life1").classList.remove("life_gone");
   document.querySelector("#life2").classList.remove("life_gone");
@@ -44,48 +36,43 @@ function resetLife() {
 }
 
 function resetPoints() {
+  // resetter point
   points = 0;
   showPoints();
 }
 
 function showStartScreen() {
+  // viser startskærm
   document.querySelector("#start").classList.remove("hidden");
   document.querySelector("#game_over").classList.add("hidden");
   document.querySelector("#level_complete").classList.add("hidden");
 }
 
 function showGameScreen() {
+  // viser spilskærm/baggrund
   document.querySelector("#start").classList.add("hidden");
   document.querySelector("#game_over").classList.add("hidden");
   document.querySelector("#level_complete").classList.add("hidden");
 }
 
 function start() {
-  // console.log("start");
-  // points = 0;
-  // lives = 6;
-  // time = 30;
-
+// starter baggrundsmusik
   resetLife();
   resetPoints();
   showGameScreen();
 
-  document.querySelector("#start").classList.add("hidden");
-  document.querySelector("#good_sound").currentTime = 0;
+  document.querySelector("#background_sound").currentTime = 0;
   document.querySelector("#background_sound").play();
 
   timeStart();
   startAnimations();
-//   startPositions();
   registerClicks();
   randomRestart();
   nonClickRestart();
 }
 
-
-
 function nonClickRestart() {
-  console.log("non click")
+// for hver fade-in/out animation skiftes position
   document.querySelector("#lime_container").addEventListener("animationiteration", randomRestart);
   document.querySelector("#mime_container").addEventListener("animationiteration", randomRestart);
   document.querySelector("#chime_container").addEventListener("animationiteration", randomRestart);
@@ -94,8 +81,8 @@ function nonClickRestart() {
   document.querySelector("#xylo_container").addEventListener("animationiteration", randomRestart);
 }
 function randomRestart() {
-  console.log("random restart");
-  restartGood.call(document.querySelector("#lime_container")); // vigtigt her at kalde container havde kaldt det her før -   document .querySelector("#mime_container") .addEventListener("click", restartGood);
+// 
+  restartGood.call(document.querySelector("#lime_container"));
   restartGood.call(document.querySelector("#mime_container"));
   restartGood.call(document.querySelector("#chime_container"));
   restartBad.call(document.querySelector("#lemon_container"));
@@ -103,6 +90,7 @@ function randomRestart() {
   restartBad.call(document.querySelector("#xylo_container"));
 }
 function registerClicks() {
+  // registrer click på containerne og sender dem videre til gode/dårlige klik
   document.querySelector("#lime_container").addEventListener("click", clickGood);
   document.querySelector("#mime_container").addEventListener("click", clickGood);
   document.querySelector("#chime_container").addEventListener("click", clickGood);
@@ -110,7 +98,9 @@ function registerClicks() {
   document.querySelector("#clown_container").addEventListener("click", clickBad);
   document.querySelector("#xylo_container").addEventListener("click", clickBad);
 }
+
 function startAnimations() {
+  // starter animationer på containerne
   document.querySelector("#lime_container").classList.add("fade_inout");
   document.querySelector("#mime_container").classList.add("fade_inout");
   document.querySelector("#chime_container").classList.add("fade_inout");
@@ -122,7 +112,7 @@ function startAnimations() {
 
 
 function clickGood() {
-  console.log("clickGood");
+// registrerer klik ; pauser container ; roter animation ; spiller lyd ; når rotation færdig gå til gone
   let good = this;
 
   good.removeEventListener("click", clickGood);
@@ -136,12 +126,11 @@ function clickGood() {
 
   good.addEventListener("animationend", goneGood);
 
-  // getLife(); // <- skal ikke bruges her
   getPoints();
 }
 
 function goneGood() {
-  console.log("goneGood");
+// roter animation fjernes ; pause fjernes ; sender this videre til genstart
   let good = this;
 
   good.removeEventListener("animationend", goneGood);
@@ -156,7 +145,7 @@ function goneGood() {
 }
 
 function restartGood() {
-  console.log("restartGood");
+// starter figurerne i en af 20 positioner
   let good = this;
 
   good.classList.remove("fade_inout");
@@ -170,7 +159,7 @@ function restartGood() {
 }
 
 function clickBad() {
-  console.log("clickBad");
+// registrerer klik ; pauser container ; roter animation ; spiller lyd ; når rotation færdig gå til gone
   let bad = this;
 
   bad.removeEventListener("click", clickBad);
@@ -189,7 +178,7 @@ function clickBad() {
 }
 
 function goneBad() {
-  console.log("goneBad");
+// roter animation fjernes ; pause fjernes ; sender this videre til genstart
   let bad = this;
 
   bad.removeEventListener("animationend", goneBad);
@@ -204,7 +193,7 @@ function goneBad() {
 }
 
 function restartBad() {
-  // console.log("restartBad");
+// starter figurerne i en af 20 positioner
   let bad = this;
 
   bad.classList.remove("fade_inout");
@@ -217,66 +206,57 @@ function restartBad() {
 }
 
 function getPoints() {
-  // console.log("getPoints");
-  // console.log(points);
+// få 10 point per godt klik; vinder hvis du får 100 point
   points += 10;
   showPoints();
-
-  if (points >= 50) {
+  if (points >= 100) {
     levelComplete();
   }
 }
 
 function losePoints() {
-  // console.log("losePoints");
-  // console.log(points);
+// mister 10 point per dårligt klik
   points -= 10;
   showPoints();
 }
 
 function showPoints() {
-  // console.log("showPoints");
+// viser point
   document.querySelector("#point_count").textContent = points;
 }
 
 function loseLife() {
-  // console.log("loseLife");
-  // console.log(lives);
+  // hvornår der er game over og fjern liv
   if (lives < 1) {
     gameOver();
     return;
   }
-
   showLostLife();
   lives--;
-  // console.log(lives);
 }
 
 function showLostLife() {
-  // console.log("showLostLife");
+// visuel representation af mistet liv
   document.querySelector("#life" + lives).classList.remove("life_there");
   document.querySelector("#life" + lives).classList.add("life_gone");
 }
 
 function gameOver() {
-  // console.log("Game Over");
+// viser game over skærm og spiller musik
   document.querySelector("#game_over").classList.remove("hidden");
   stop();
-  document.querySelector("#background_sound").pause();
   document.querySelector("#gameover_sound").play();
 }
 
 function levelComplete() {
-  // console.log("Level Complete");
+// viser level complete skærm og spiller musik
   document.querySelector("#level_complete").classList.remove("hidden");
   stop();
-
   document.querySelector("#levelcomplete_sound").play();
 }
 
 function stop() {
-  // console.log("Stop");
-
+// stopper animationer og klik registrering pauser baggrundsmusik og resetter point, liv og ur
   document.querySelector("#lime_container").classList.remove("fade_inout");
   document.querySelector("#mime_container").classList.remove("fade_inout");
   document.querySelector("#chime_container").classList.remove("fade_inout");
@@ -296,37 +276,4 @@ function stop() {
   resetPoints();
   resetLife();
   document.querySelector("#time_sprite").classList.remove("shrink_watch");
-
-  // startPositions();
 }
-
-
-
-
-// function startPositions() {
-//   document.querySelector("#lime_container").classList.add("position7");
-//   document.querySelector("#mime_container").classList.add("position8");
-//   document.querySelector("#chime_container").classList.add("position12");
-//   document.querySelector("#lemon_container").classList.add("position13");
-//   document.querySelector("#clown_container").classList.add("position14");
-//   document.querySelector("#xylo_container").classList.add("position9");
-// }
-
-// function getLife() {
-//     console.log(lives);
-//     console.log("getLife");
-
-//     if (lives == 6) {
-//        return;
-//     }
-
-//     lives++;
-//     console.log(lives);
-//     showGottenLife();
-// }
-
-// function showGottenLife() {
-//     console.log("showGottenLife");
-//     document.querySelector("#life" + lives).classList.add("life_there");
-//     document.querySelector("#life" + lives).classList.remove("life_gone");
-// }
