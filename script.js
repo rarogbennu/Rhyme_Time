@@ -67,21 +67,21 @@ function start() {
   timeStart();
   startAnimations();
   registerClicks();
-  randomRestart();
+  randomStart();
   nonClickRestart();
 }
 
 function nonClickRestart() {
 // for hver fade-in/out animation skiftes position
-  document.querySelector("#lime_container").addEventListener("animationiteration", randomRestart);
-  document.querySelector("#mime_container").addEventListener("animationiteration", randomRestart);
-  document.querySelector("#chime_container").addEventListener("animationiteration", randomRestart);
-  document.querySelector("#lemon_container").addEventListener("animationiteration", randomRestart);
-  document.querySelector("#clown_container").addEventListener("animationiteration", randomRestart);
-  document.querySelector("#xylo_container").addEventListener("animationiteration", randomRestart);
+  document.querySelector("#lime_container").addEventListener("animationiteration", randomStart);
+  document.querySelector("#mime_container").addEventListener("animationiteration", randomStart);
+  document.querySelector("#chime_container").addEventListener("animationiteration", randomStart);
+  document.querySelector("#lemon_container").addEventListener("animationiteration", randomStart);
+  document.querySelector("#clown_container").addEventListener("animationiteration", randomStart);
+  document.querySelector("#xylo_container").addEventListener("animationiteration", randomStart);
 }
-function randomRestart() {
-// 
+function randomStart() {
+// sætter tilfældig startposition
   restartGood.call(document.querySelector("#lime_container"));
   restartGood.call(document.querySelector("#mime_container"));
   restartGood.call(document.querySelector("#chime_container"));
@@ -90,7 +90,7 @@ function randomRestart() {
   restartBad.call(document.querySelector("#xylo_container"));
 }
 function registerClicks() {
-  // registrer click på containerne og sender dem videre til gode/dårlige klik
+  // registrerer click på containerne og sender dem videre til gode/dårlige klik
   document.querySelector("#lime_container").addEventListener("click", clickGood);
   document.querySelector("#mime_container").addEventListener("click", clickGood);
   document.querySelector("#chime_container").addEventListener("click", clickGood);
